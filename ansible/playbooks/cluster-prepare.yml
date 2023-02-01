@@ -26,6 +26,16 @@
             keyboard_layout: es
     - name: Networking
       block:
+        - name: Networking | Check if resolv.conf exists
+          ansible.builtin.stat: path=/etc/resolv.conf
+          register: resolv_exists
+        - name: Networking | Backup resolv.conf file
+          when: resolv_exists.stat.exists
+          ansible.builtin.command: mv /etc/resolv.conf /etc/resolv.conf.bak
+        - name: Networking | Create new resolv.conf file
+          ansible.builtin.copy:
+            dest: "/etc/resolv.conf"
+            content: "nameserver 1.1.1.1"
         - name: Networking | Set hostname to inventory hostname
           ansible.builtin.hostname:
             name: "{{ inventory_hostname }}"
