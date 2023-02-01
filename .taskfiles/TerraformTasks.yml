@@ -20,3 +20,33 @@ tasks:
     dir: "{{.TERRAFORM_DIR}}/cloudflare"
     cmds:
       - terraform apply {{.CLI_ARGS}}
+
+  prox-init:
+    desc: Initialize terraform dependencies
+    dir: "{{.TERRAFORM_DIR}}/proxmox"
+    cmds:
+      - terraform init {{.CLI_ARGS}}
+
+  prox-plan:
+    desc: Show the changes terraform will make
+    dir: "{{.TERRAFORM_DIR}}/proxmox"
+    cmds:
+      - terraform plan {{.CLI_ARGS}}
+
+  prox-apply:
+    desc: Apply the changes to Cloudflare
+    dir: "{{.TERRAFORM_DIR}}/proxmox"
+    cmds:
+      - terraform apply {{.CLI_ARGS}}
+
+  prox-destroy:
+    desc: Apply the changes to Cloudflare
+    dir: "{{.TERRAFORM_DIR}}/proxmox"
+    cmds:
+      - terraform destroy {{.CLI_ARGS}}
+
+  prox-reset:
+    desc: Apply the changes to Cloudflare
+    dir: "{{.TERRAFORM_DIR}}/proxmox"
+    cmds:
+      - /bin/bash reset_terraform.sh

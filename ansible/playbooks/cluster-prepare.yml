@@ -15,6 +15,15 @@
         - name: Locale | Set timezone
           community.general.timezone:
             name: "{{ timezone | default('Etc/UTC') }}"
+    - name: Keyboard
+      block:
+        - name: Keyboard | Set layout
+          ansible.builtin.include_role:
+            name: gantsign.keyboard
+            public: true
+          vars:
+            keyboard_model: pc105
+            keyboard_layout: es
     - name: Networking
       block:
         - name: Networking | Set hostname to inventory hostname
