@@ -27,7 +27,8 @@
     - name: Networking
       block:
         - name: Networking | Check if resolv.conf exists
-          ansible.builtin.stat: path=/etc/resolv.conf
+          ansible.builtin.stat:
+            path: /etc/resolv.conf
           register: resolv_exists
         - name: Networking | Backup resolv.conf file
           when: resolv_exists.stat.exists
@@ -35,7 +36,8 @@
         - name: Networking | Create new resolv.conf file
           ansible.builtin.copy:
             dest: "/etc/resolv.conf"
-            content: "nameserver 1.1.1.1"
+            content: "nameserver 192.168.1.11"
+            mode: "0644"
         - name: Networking | Set hostname to inventory hostname
           ansible.builtin.hostname:
             name: "{{ inventory_hostname }}"
@@ -45,6 +47,7 @@
             block: |
               127.0.1.1   {{ inventory_hostname }}
     - name: Packages | Fedora
+      when: ansible_facts['distribution'] == 'Fedora'
       block:
         - name: Packages | Install required packages
           ansible.builtin.dnf:
@@ -54,8 +57,8 @@
         - name: Packages | Remove leaf packages
           ansible.builtin.dnf:
             autoremove: true
-      when: ansible_facts['distribution'] == 'Fedora'
     - name: Packages | Ubuntu
+      when: ansible_facts['distribution'] == 'Ubuntu'
       block:
         - name: Packages | Install required packages
           ansible.builtin.apt:
@@ -71,7 +74,6 @@
             install_recommends: false
           notify: Reboot
           when: "'raspi' in ansible_kernel"
-      when: ansible_facts['distribution'] == 'Ubuntu'
     - name: User Configuration
       block:
         - name: User Configuration | Add additional SSH public keys
@@ -100,6 +102,7 @@
             service: fstrim.timer
             enabled: true
     - name: System Configuration (2)
+      notify: Reboot
       block:
         - name: System Configuration (2) | Enable kernel modules now
           community.general.modprobe:
@@ -152,7 +155,6 @@
             state: permissive
             policy: targeted
           when: ansible_facts['distribution'] == 'Fedora'
-      notify: Reboot
 
   handlers:
     - name: Reboot
