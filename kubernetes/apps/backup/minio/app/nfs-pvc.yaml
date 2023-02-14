@@ -3,7 +3,7 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: minio-nfs
-  namespace: storage
+  namespace: backup
 spec:
   storageClassName: minio-nfs
   capacity:
@@ -24,7 +24,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: minio-nfs
-  namespace: storage
+  namespace: backup
 spec:
   accessModes:
     - ReadWriteMany
