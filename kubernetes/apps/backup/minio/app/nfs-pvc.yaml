@@ -13,7 +13,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   nfs:
     server: "${NFS_SERVER}"
-    path: "${NFS_BASE_PATH}/backups/minio"
+    path: /mnt/storage/backups/minio
   mountOptions:
     - nfsvers=4.2
     - nconnect=8
