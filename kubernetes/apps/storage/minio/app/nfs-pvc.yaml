@@ -5,20 +5,20 @@ metadata:
   name: minio-nfs
   namespace: storage
 spec:
+  storageClassName: minio-nfs
   capacity:
-    storage: 1Mi
+    storage: 18T
   accessModes:
     - ReadWriteMany
-  storageClassName: minio-nfs
   persistentVolumeReclaimPolicy: Retain
   nfs:
-    server: "${SECRET_BACKUP_SERVER}"
-    path: /mnt/storage/backups/minio
-  #mountOptions:
-  #  - nfsvers=4.2
-  #  - nconnect=8
-  #  - hard
-  #  - noatime
+    server: "${NFS_SERVER}"
+    path: "${NFS_BASE_PATH}/backups/minio"
+  mountOptions:
+    - nfsvers=4.2
+    - nconnect=8
+    - hard
+    - noatime
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
