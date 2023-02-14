@@ -14,11 +14,11 @@ spec:
   nfs:
     server: "${SECRET_BACKUP_SERVER}"
     path: /mnt/storage/backups/minio
-  mountOptions:
-    - nfsvers=4.2
-    - nconnect=8
-    - hard
-    - noatime
+  #mountOptions:
+  #  - nfsvers=4.2
+  #  - nconnect=8
+  #  - hard
+  #  - noatime
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
