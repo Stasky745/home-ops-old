@@ -105,9 +105,9 @@ spec:
           - hosts:
               - *host-api
     podSecurityContext:
-      runAsUser: 103
-      runAsGroup: 103
-      fsGroup: 103
+      runAsUser: 1005
+      runAsGroup: 1005
+      fsGroup: 1005
       fsGroupChangePolicy: "OnRootMismatch"
     persistence:
       config:
