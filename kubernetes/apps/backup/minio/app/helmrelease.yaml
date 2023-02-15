@@ -43,7 +43,7 @@ spec:
       # MINIO_IDENTITY_OPENID_REDIRECT_URI: "https://minio.${SECRET_DOMAIN}/oauth_callback"
     envFrom:
       - secretRef:
-          name: *app
+          name: minio-secret
     args: ["server", "/data", "--console-address", ":9001"]
     service:
       main:
