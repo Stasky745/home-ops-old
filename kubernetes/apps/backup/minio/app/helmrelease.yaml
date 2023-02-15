@@ -56,22 +56,22 @@ spec:
             enabled: true
             port: &port-api 9000
     # PROMETHEUS
-    #serviceMonitor:
-    #  main:
-    #    enabled: true
-    #    endpoints:
-    #      - port: api
-    #        scheme: http
-    #        path: /minio/v2/metrics/cluster
-    #        interval: 1m
-    #        scrapeTimeout: 10s
-    #        bearerTokenSecret:
-    #          name: minio-prometheus
-    #          key: token
+    serviceMonitor:
+      main:
+        enabled: true
+        endpoints:
+          - port: api
+            scheme: http
+            path: /minio/v2/metrics/cluster
+            interval: 1m
+            scrapeTimeout: 10s
+            bearerTokenSecret:
+              name: minio-prometheus
+              key: token
     ingress:
       main:
         enabled: true
-        ingressClassName: "nginx"
+        ingressClassName: nginx
         annotations:
           hajimari.io/appName: "Minio Console"
           hajimari.io/enable: "true"
@@ -88,7 +88,7 @@ spec:
               - *host-console
       s3:
         enabled: true
-        ingressClassName: "nginx"
+        ingressClassName: nginx
         annotations:
           nginx.ingress.kubernetes.io/proxy-connect-timeout: "300"
           nginx.ingress.kubernetes.io/proxy-body-size: 5000m
@@ -115,8 +115,6 @@ spec:
         enabled: true
         existingClaim: minio-nfs
         mountPath: /data
-    podAnnotations:
-      secret.reloader.stakater.com/reload: *app
     resources:
       requests:
         memory: 100Mi
