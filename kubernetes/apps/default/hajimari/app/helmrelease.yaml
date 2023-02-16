@@ -28,7 +28,7 @@ spec:
   values:
     hajimari:
       title: Apps
-      darkTheme: espresso
+      darkTheme: horizon
       alwaysTargetBlank: true
       showGreeting: false
       showAppGroups: false
