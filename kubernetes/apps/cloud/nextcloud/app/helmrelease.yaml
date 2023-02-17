@@ -49,6 +49,10 @@ spec:
         smtp:
           port: 587
           authtype: LOGIN
+      podSecurityContext:
+        runAsUser: 1005
+        runAsGroup: 1005
+        fsGroup: 1005
     internalDatabase:
       enabled: false
     externalDatabase:
