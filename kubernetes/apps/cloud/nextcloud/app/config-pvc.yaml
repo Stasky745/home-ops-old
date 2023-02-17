@@ -18,12 +18,12 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: &name nextcloud-config
+  name: &name nextcloud
   namespace: cloud
   labels:
     app.kubernetes.io/name: *name
     app.kubernetes.io/instance: *name
-    snapshot.home.arpa/enabled: "true"
+    # snapshot.home.arpa/enabled: "true"
 spec:
   accessModes: ["ReadWriteOnce"]
   resources:
