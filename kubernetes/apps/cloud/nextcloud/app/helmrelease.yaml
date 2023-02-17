@@ -48,6 +48,9 @@ spec:
         smtp:
           port: 587
           authtype: LOGIN
+      podSecurityContext:
+        runAsUser: "1005"
+        runAsGroup: "1005"
     internalDatabase:
       enabled: false
     externalDatabase:
@@ -77,9 +80,6 @@ spec:
         enabled: true
         existingClaim: nextcloud-nfs
         accessMode: ReadWriteMany
-    podSecurityContext:
-      runAsUser: 1005
-      runAsGroup: 1005
   valuesFrom:
     - targetPath: externalDatabase.user
       kind: Secret
