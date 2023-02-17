@@ -80,8 +80,6 @@ spec:
     podSecurityContext:
       runAsUser: 1005
       runAsGroup: 1005
-      fsGroup: 1005
-      fsGroupChangePolicy: "OnRootMismatch"
   valuesFrom:
     - targetPath: externalDatabase.user
       kind: Secret
