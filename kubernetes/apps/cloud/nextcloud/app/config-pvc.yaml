@@ -6,7 +6,7 @@ metadata:
 spec:
   capacity:
     storage: 5Gi
-  accessModes: ["ReadWriteMany"]
+  accessModes: ["ReadWriteOnce"]
   storageClassName: nextcloud-config
   persistentVolumeReclaimPolicy: Retain
   nfs:
@@ -27,7 +27,6 @@ metadata:
 spec:
   accessModes: ["ReadWriteOnce"]
   storageClassName: nextcloud-config
-  volumeName: nextcloud-config
   resources:
     requests:
       storage: 5Gi
