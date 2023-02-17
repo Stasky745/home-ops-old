@@ -1,13 +1,14 @@
 ---
+# yaml-language-server: $schema=https://kubernetes-schemas.devbu.io/kustomization_v1beta2.json
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-nextcloud
+  name: cluster-apps-nexcloud
   namespace: flux-system
-  labels:
-    substitution.flux.home.arpa/enabled: "true"
 spec:
-  path: ./kubernetes/apps/cloud/default/app
+  dependsOn:
+    - name: cluster-apps-cloudnative-pg
+  path: ./kubernetes/apps/cloud/nexcloud/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -15,8 +16,8 @@ spec:
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2beta1
       kind: HelmRelease
-      name: nextcloud
-      namespace: default
+      name: nexcloud
+      namespace: cloud
   interval: 30m
   retryInterval: 1m
   timeout: 3m
