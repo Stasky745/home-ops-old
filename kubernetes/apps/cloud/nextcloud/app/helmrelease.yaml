@@ -52,7 +52,9 @@ spec:
       podSecurityContext:
         runAsUser: 1005
         runAsGroup: 1005
-        fsGroup: 1005
+      securityContext:
+        runAsUser: 1005
+        runAsGroup: 1005
     internalDatabase:
       enabled: false
     externalDatabase:
