@@ -23,10 +23,11 @@ metadata:
   labels:
     app.kubernetes.io/name: *name
     app.kubernetes.io/instance: *name
-    # snapshot.home.arpa/enabled: "true"
+    snapshot.home.arpa/enabled: "true"
 spec:
   accessModes: ["ReadWriteOnce"]
+  storageClassName: nextcloud-config
+  volumeName: nextcloud-config
   resources:
     requests:
       storage: 5Gi
-  storageClassName: nextcloud-config
