@@ -31,9 +31,6 @@ spec:
       flavor: fpm-alpine
     nginx:
       enabled: true
-      securityContext:
-        runAsUser: 1005
-        runAsGroup: 1005
     nextcloud:
       datadir: /var/www/data
       extraEnv:
@@ -52,12 +49,6 @@ spec:
         smtp:
           port: 587
           authtype: LOGIN
-      podSecurityContext:
-        runAsUser: 1005
-        runAsGroup: 1005
-      securityContext:
-        runAsUser: 1005
-        runAsGroup: 1005
     internalDatabase:
       enabled: false
     externalDatabase:
