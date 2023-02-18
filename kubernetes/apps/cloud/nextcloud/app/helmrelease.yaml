@@ -31,14 +31,14 @@ spec:
       flavor: fpm-alpine
     env:
       PHP_MEMORY_LIMIT: 512M
-    nginx:
-      enabled: true
-      config:
-        custom: |-
-          upstream php-handler {
-            server 127.0.0.1:9000;
-            server unix:/var/run/php/php8.1-fpm.sock;
-          }
+    # nginx:
+    #   enabled: true
+    #   config:
+    #     custom: |-
+    #       upstream php-handler {
+    #         server 127.0.0.1:9000;
+    #         server unix:/var/run/php/php8.1-fpm.sock;
+    #       }
     nextcloud:
       datadir: /var/www/data
       extraEnv:
