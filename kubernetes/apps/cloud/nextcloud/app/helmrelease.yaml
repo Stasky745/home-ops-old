@@ -32,14 +32,14 @@ spec:
     env:
       PHP_MEMORY_LIMIT: 512M
     nginx:
-      enabled: false
+      enabled: true
       # https://help.nextcloud.com/t/stable-nextcloud-connect-failed-111-connection-refused-while-connecting-to-upstream-client-x-x-x-x-server-request-get-status-php-http-1-1-upstream-fastcgi-127-0-0-1-9000-host-nc-xxxx-com/77987
-      #config:
-      #  custom: |-
-      #    upstream php-handler {
-      #      server 127.0.0.1:9000;
-      #      server unix:/var/run/php/php8.1-fpm.sock;
-      #    }
+      config:
+        custom: |-
+          upstream php-handler {
+            server 127.0.0.1:9000;
+            server unix:/var/run/php/php8.1-fpm.sock;
+          }
     nextcloud:
       datadir: /var/www/data
       extraEnv:
