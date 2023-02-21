@@ -58,24 +58,27 @@ spec:
         smtp:
           port: 587
           authtype: LOGIN
-      # phpConfigs:
-      #   uploadLimit.ini: |
-      #     upload_max_filesize = 16G
-      #     post_max_size = 16G
-      #     max_input_time = 3600
-      #     max_execution_time = 3600
-      # configs:
-      #   proxy.config.php: |-
-      #     <?php
-      #     $CONFIG = array (
-      #       'trusted_proxies' => array(
-      #         0 => '127.0.0.1',
-      #         1 => '10.0.0.0/8',
-      #         2 => '${DNS_IP}',
-      #         3 => '${ROUTER_IP}'
-      #       ),
-      #       'forwarded_for_headers' => array('HTTP_X_FORWARDED_FOR'),
-      #     );
+      phpConfigs:
+        uploadLimit.ini: |
+          upload_max_filesize = 16G
+          post_max_size = 16G
+          max_input_time = 3600
+          max_execution_time = 3600
+          memory_limit = 1G
+      configs:
+        proxy.config.php: |-
+          <?php
+          $CONFIG = array (
+            'trusted_proxies' => array(
+              0 => '127.0.0.1',
+              1 => '10.0.0.0/8',
+              2 => '${DNS_IP}',
+              3 => '${ROUTER_IP}',
+              4 => '${METALLB_INGRESS_ADDR}',
+              5 => '${METALLB_K8S_GATEWAY_ADDR}'
+            ),
+            'forwarded_for_headers' => array('HTTP_X_FORWARDED_FOR'),
+          );
     internalDatabase:
       enabled: false
     externalDatabase:
@@ -113,6 +116,13 @@ spec:
           location = /.well-known/caldav {
             return 301 $scheme://$host/remote.php/dav;
           }
+          location = /.well-known/webfinger {
+            return 301 $scheme://$host/index.php/.well-known/webfinger;
+          }
+          location = /.well-known/nodeinfo {
+            return 301 $scheme://$host/index.php/.well-known/nodeinfo;
+          }
+
           location = /robots.txt {
             allow all;
             log_not_found off;
@@ -129,6 +139,7 @@ spec:
       tls:
         - hosts:
             - *host
+    # Had errors until both NFS drives were owned by the www-data user (my case id 82)
     persistence:
       enabled: true
       existingClaim: nextcloud-config
