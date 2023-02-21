@@ -58,6 +58,8 @@ spec:
         smtp:
           port: 587
           authtype: LOGIN
+          name: ""
+          password: ""
       # phpConfigs:
       #   uploadLimit.ini: |
       #     upload_max_filesize = 16G
@@ -192,14 +194,6 @@ spec:
       kind: Secret
       name: nextcloud
       valuesKey: database-password
-    - targetPath: nextcloud.mail.smtp.name
-      kind: Secret
-      name: nextcloud
-      valuesKey: smtp-username
-    - targetPath: nextcloud.mail.smtp.password
-      kind: Secret
-      name: nextcloud
-      valuesKey: smtp-password
     - targetPath: nextcloud.mail.smtp.host
       kind: Secret
       name: nextcloud
