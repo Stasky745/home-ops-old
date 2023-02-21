@@ -34,12 +34,12 @@ spec:
     nginx:
       enabled: true
       # https://help.nextcloud.com/t/stable-nextcloud-connect-failed-111-connection-refused-while-connecting-to-upstream-client-x-x-x-x-server-request-get-status-php-http-1-1-upstream-fastcgi-127-0-0-1-9000-host-nc-xxxx-com/77987
-      config:
-        custom: |-
-          upstream php-handler {
-            server 127.0.0.1:9000;
-            server unix:/var/run/php/php8.1-fpm.sock;
-          }
+      # config:
+      #   custom: |-
+      #     upstream php-handler {
+      #       server 127.0.0.1:9000;
+      #       server unix:/var/run/php/php8.1-fpm.sock;
+      #     }
     nextcloud:
       datadir: /var/www/data
       extraEnv:
@@ -58,12 +58,12 @@ spec:
         smtp:
           port: 587
           authtype: LOGIN
-      phpConfigs:
-        uploadLimit.ini: |
-          upload_max_filesize = 16G
-          post_max_size = 16G
-          max_input_time = 3600
-          max_execution_time = 3600
+      # phpConfigs:
+      #   uploadLimit.ini: |
+      #     upload_max_filesize = 16G
+      #     post_max_size = 16G
+      #     max_input_time = 3600
+      #     max_execution_time = 3600
       # configs:
       #   proxy.config.php: |-
       #     <?php
@@ -112,6 +112,9 @@ spec:
       enabled: true
       className: "nginx"
       annotations:
+        external-dns.home.arpa/enabled: "true"
+        hajimari.io/enable: "true"
+        hajimari.io/icon: mdi:dropbox
         nginx.ingress.kubernetes.io/proxy-body-size: "10G"
         nginx.ingress.kubernetes.io/proxy-buffering: "off"
         nginx.ingress.kubernetes.io/proxy-request-buffering: "off"
@@ -126,40 +129,26 @@ spec:
             }
           }
 
+          rewrite ^/.well-known/webfinger /public.php?service=webfinger last;
+          rewrite ^/.well-known/host-meta /public.php?service=host-meta last;
+          rewrite ^/.well-known/host-meta.json /public.php?service=host-meta-json;
+          location = /.well-known/carddav {
+            return 301 $scheme://$host/remote.php/dav;
+          }
+          location = /.well-known/caldav {
+            return 301 $scheme://$host/remote.php/dav;
+          }
           location = /robots.txt {
-              allow all;
-              log_not_found off;
-              access_log off;
+            allow all;
+            log_not_found off;
+            access_log off;
           }
-
-          location ^~ /.well-known {
-
-            # The rules in this block are an adaptation of the rules
-            # in .htaccess that concern /.well-known.
-
-            location = /.well-known/carddav { return 301 /remote.php/dav/; }
-            location = /.well-known/caldav  { return 301 /remote.php/dav/; }
-
-            location /.well-known/acme-challenge    { try_files $uri $uri/ =404; }
-            location /.well-known/pki-validation    { try_files $uri $uri/ =404; }
-
-            # Let Nextcloud's API for /.well-known URIs handle all other
-            # requests by passing them to the front-end controller.
-            return 301 /index.php$request_uri;
-          }
-
-          # Rules borrowed from .htaccess to hide certain paths from clients
           location ~ ^/(?:build|tests|config|lib|3rdparty|templates|data)/ {
             deny all;
           }
           location ~ ^/(?:autotest|occ|issue|indie|db_|console) {
             deny all;
           }
-
-          # Rule borrowed from .htaccess
-          #location /remote {
-          #    return 301 /remote.php$request_uri;
-          #}
       path: /
       pathType: Prefix
       tls:
