@@ -136,6 +136,14 @@ spec:
         enabled: true
         existingClaim: nextcloud-nfs
         accessMode: ReadWriteMany
+    # this seems to be required for nextcloud initialization which takes a long time
+    startupProbe:
+      enabled: true
+      initialDelaySeconds: 30
+      periodSeconds: 10
+      timeoutSeconds: 5
+      failureThreshold: 30
+      successThreshold: 1
   valuesFrom:
     - targetPath: externalDatabase.user
       kind: Secret
