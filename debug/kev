@@ -1,0 +1,1 @@
+kubectl get events --field-selector type=Warning --sort-by='.metadata.creationTimestamp'
