@@ -31,8 +31,8 @@ spec:
       darkTheme: horizon
       alwaysTargetBlank: true
       showGreeting: false
-      showAppGroups: false
-      showAppStatus: false
+      showAppGroups: true
+      showAppStatus: true
       showBookmarkGroups: false
       showGlobalBookmarks: false
       showAppUrls: false
