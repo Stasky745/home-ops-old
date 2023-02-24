@@ -17,16 +17,16 @@ resource "proxmox_vm_qemu" "worker-node-template" {
   agent = 1
 
   # VM CPU Settings
-  cores   = 2
-  sockets = 1
+  cores   = 4
+  sockets = 2
   cpu     = "host"
 
   # VM Memory Settings
-  memory = 4096
+  memory = 8192
 
   # VM Disk Settings
   disk {
-    size    = "40G"
+    size    = "50G"
     type    = "virtio"
     storage = "local-lvm"
     backup  = 1
