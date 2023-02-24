@@ -60,25 +60,25 @@ spec:
           authtype: LOGIN
           name: ""
           password: ""
-      phpConfigs:
-        uploadLimit.ini: |
-          upload_max_filesize = 16G
-          post_max_size = 16G
-          max_input_time = 3600
-          max_execution_time = 3600
-          memory_limit = 1G
-          default_phone_region = ES
-      # configs:
-      #   nc-settings.config.php: |-
-      #     <?php
-      #     $CONFIG = array (
-      #       'default_phone_region' => 'ES',
-      #       'upload_max_filesize' => '16G',
-      #       'post_max_size' => '16G',
-      #       'max_input_time' => '3600',
-      #       'max_execution_time' => '3600',
-      #       'memory_limit' => '1G'
-      #     );
+      # phpConfigs:
+      #   uploadLimit.ini: |
+      #     upload_max_filesize = 16G
+      #     post_max_size = 16G
+      #     max_input_time = 3600
+      #     max_execution_time = 3600
+      #     memory_limit = 1G
+      #     default_phone_region = ES
+      configs:
+        nc-settings.config.php: |-
+          <?php
+          $CONFIG = array (
+            'default_phone_region' => 'ES',
+            'upload_max_filesize' => '16G',
+            'post_max_size' => '16G',
+            'max_input_time' => '3600',
+            'max_execution_time' => '3600',
+            'memory_limit' => '1G'
+          );
         # custom.config.php: |-
         #   <?php
         #   $CONFIG = array (
