@@ -46,7 +46,7 @@ spec:
         - name: REDIS_HOST
           value: redis-lb.database.svc.cluster.local
         - name: REDIS_HOST_PORT
-          value: "6379"
+          value: 6379
       existingSecret:
         enabled: true
         secretName: nextcloud
@@ -62,26 +62,15 @@ spec:
           password: ""
       default_configs:
         redis.config.php: false
-      # phpConfigs:
-      #   uploadLimit.ini: |
-      #     upload_max_filesize = 16G
-      #     post_max_size = 16G
-      #     max_input_time = 3600
-      #     max_execution_time = 3600
-      #     memory_limit = 1G
-      #     default_phone_region = ES
+      phpConfigs:
+        uploadLimit.ini: |
+          upload_max_filesize = 16G
+          post_max_size = 16G
+          max_input_time = 3600
+          max_execution_time = 3600
+          memory_limit = 1G
+          default_phone_region = ES
       configs:
-        redis.config.php: |-
-          <?php
-          $CONFIG = array (
-            'memcache.local' => '\\OC\\Memcache\\Redis',
-            'memcache.distributed' => '\OC\Memcache\Redis',
-            'memcache.locking' => '\OC\Memcache\Redis',
-            'redis' => array(
-              'host' => 'redis-lb.database.svc.cluster.local',
-              'port' => 6379
-            )
-          );
       #   nc-settings.config.php: |-
       #     <?php
       #     $CONFIG = array (
