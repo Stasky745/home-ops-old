@@ -16,3 +16,5 @@ xanmanning.k3s*
 .terraform.tfstate*
 terraform.tfstate*
 .terraform.lock*
+# Extra
+minio-upload.sh
