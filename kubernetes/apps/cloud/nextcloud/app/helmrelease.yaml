@@ -60,6 +60,8 @@ spec:
           authtype: LOGIN
           name: ""
           password: ""
+      default_configs:
+        redis.config.php: false
       # phpConfigs:
       #   uploadLimit.ini: |
       #     upload_max_filesize = 16G
@@ -68,7 +70,7 @@ spec:
       #     max_execution_time = 3600
       #     memory_limit = 1G
       #     default_phone_region = ES
-      # configs:
+      configs:
       #   nc-settings.config.php: |-
       #     <?php
       #     $CONFIG = array (
@@ -108,17 +110,17 @@ spec:
         #     'max_execution_time' => '3600',
         #     'memory_limit' => '1G'
         #   );
-        # redis.config.php: |-
-        #   <?php
-        #   $CONFIG = array (
-        #     'memcache.local' => '\\OC\\Memcache\\Redis',
-        #     'memcache.distributed' => '\OC\Memcache\Redis',
-        #     'memcache.locking' => '\OC\Memcache\Redis',
-        #     'redis' => array(
-        #       'host' => 'redis-lb.database.svc.cluster.local',
-        #       'port' => 6379
-        #     )
-        #   );
+        redis.config.php: |-
+          <?php
+          $CONFIG = array (
+            'memcache.local' => '\\OC\\Memcache\\Redis',
+            'memcache.distributed' => '\OC\Memcache\Redis',
+            'memcache.locking' => '\OC\Memcache\Redis',
+            'redis' => array(
+              'host' => 'redis-lb.database.svc.cluster.local',
+              'port' => 6379
+            )
+          );
     internalDatabase:
       enabled: false
     externalDatabase:
