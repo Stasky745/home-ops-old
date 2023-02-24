@@ -60,8 +60,6 @@ spec:
           authtype: LOGIN
           name: ""
           password: ""
-      default_configs:
-        redis.config.php: false
       phpConfigs:
         uploadLimit.ini: |
           upload_max_filesize = 16G
