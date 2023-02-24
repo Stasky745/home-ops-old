@@ -40,6 +40,9 @@ spec:
       namespaceSelector:
         matchNames:
           - default
+          - rook-ceph
+          - monitoring
+          - cloud
     ingress:
       main:
         enabled: true
