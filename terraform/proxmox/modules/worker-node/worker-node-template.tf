@@ -26,14 +26,14 @@ resource "proxmox_vm_qemu" "worker-node-template" {
 
   # VM Disk Settings
   disk {
-    size    = "30G"
+    size    = "50G"
     type    = "virtio"
     storage = "local-lvm"
     backup  = 1
   }
 
   disk {
-    size    = "20G"
+    size    = "30G"
     type    = "virtio"
     storage = "local-lvm"
     backup  = 1

@@ -10,9 +10,9 @@ module "worker-1" {
   node-ipconfig = "ip=192.168.1.211/24,gw=192.168.1.1"
 }
 
-module "worker-2" {
-  source        = "./modules/worker-node"
-  node-id       = 212
-  node-name     = "k8s-w2"
-  node-ipconfig = "ip=192.168.1.212/24,gw=192.168.1.1"
-}
+#module "worker-2" {
+#  source        = "./modules/worker-node"
+#  node-id       = 212
+#  node-name     = "k8s-w2"
+#  node-ipconfig = "ip=192.168.1.212/24,gw=192.168.1.1"
+#}
