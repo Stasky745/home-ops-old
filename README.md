@@ -1,3 +1,9 @@
+# MY HOME-LAB
+
+Hey all! 👋
+
+This is my home-lab setting inspired by [onedr0p's flux-cluster-template](https://github.com/onedr0p/flux-cluster-template). I am trying to replicate the current functioning infrastructure I have in the form of LXC within a [Proxmox Virtual Environment](https://www.proxmox.com/en/) into a fully automated Kubernetes cluster. It is currently hosted as VMs within Proxmox (set up with Terraform [here](https://github.com/Stasky745/home-ops/tree/main/terraform/proxmox)) and on hold because of hardware limitations. I am using the VMs and K3s cluster as practice grounds for the courses in [KodeKloud](https://kodekloud.com) and practicing simple projects, and in preparation for the [CKAD](https://www.cncf.io/certification/ckad/).
+
 # Template for deploying k3s backed by Flux
 
 Highly opinionated template for deploying a single [k3s](https://k3s.io) cluster with [Ansible](https://www.ansible.com) and [Terraform](https://www.terraform.io) backed by [Flux](https://toolkit.fluxcd.io/) and [SOPS](https://toolkit.fluxcd.io/guides/mozilla-sops/).
